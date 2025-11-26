@@ -1,0 +1,2127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Hub | Universal Script</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo 2', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000;
+            color: #f0f0f0;
+            overflow-x: hidden;
+            --gap: 5em;
+            --line: 1px;
+            --color: rgba(255, 255, 255, 0.1);
+            background-image: linear-gradient(
+                -90deg,
+                transparent calc(var(--gap) - var(--line)),
+                var(--color) calc(var(--gap) - var(--line) + 1px),
+                var(--color) var(--gap)
+              ),
+              linear-gradient(
+                0deg,
+                transparent calc(var(--gap) - var(--line)),
+                var(--color) calc(var(--gap) - var(--line) + 1px),
+                var(--color) var(--gap)
+              );
+            background-size: var(--gap) var(--gap);
+            background-attachment: fixed;
+            transition: background-color 0.5s ease;
+            scroll-behavior: smooth;
+        }
+
+        body.theme-default {
+            --accent-color: #cccccc;
+            --accent-gradient: linear-gradient(to right, #888888, #aaaaaa);
+            --primary-color: #cccccc;
+        }
+
+        body.theme-yellow {
+            --accent-color: #ffcc00;
+            --accent-gradient: linear-gradient(to right, #ffcc00, #ffdd44);
+            --primary-color: #ffcc00;
+        }
+
+        body.theme-blue {
+            --accent-color: #4488ff;
+            --accent-gradient: linear-gradient(to right, #4488ff, #66aaff);
+            --primary-color: #4488ff;
+        }
+
+        body.theme-midnight {
+            --accent-color: #6633cc;
+            --accent-gradient: linear-gradient(to right, #6633cc, #8855ee);
+            --primary-color: #6633cc;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Snow Effect */
+        .snow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .snow {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            filter: blur(0.5px);
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10px) translateX(0px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(100vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(100, 100, 100, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+            filter: brightness(0.9);
+            border: 2px solid transparent;
+        }
+
+        .logo:hover .logo-img {
+            transform: scale(1.1) rotate(5deg);
+            filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Navigation Center */
+        .nav-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+
+        /* New Navigation with Gray Theme */
+        .radio-inputs {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            border-radius: 1rem;
+            background: linear-gradient(145deg, #333333, #555555);
+            box-sizing: border-box;
+            box-shadow:
+                5px 5px 15px rgba(0, 0, 0, 0.3),
+                -5px -5px 15px rgba(100, 100, 100, 0.1);
+            padding: 0.5rem;
+            width: fit-content;
+            font-size: 14px;
+            gap: 0.5rem;
+        }
+
+        .radio-inputs .radio {
+            flex: 1 1 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .radio-inputs .radio input {
+            display: none;
+        }
+
+        .radio-inputs .radio .name {
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.7rem;
+            border: none;
+            padding: 0.7rem 1.2rem;
+            color: #e5e5e5;
+            font-weight: 500;
+            font-family: inherit;
+            background: linear-gradient(145deg, #444444, #333333);
+            box-shadow:
+                3px 3px 6px rgba(0, 0, 0, 0.3),
+                -3px -3px 6px rgba(100, 100, 100, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            min-width: 80px;
+        }
+
+        .radio-inputs .radio input:checked + .name {
+            background: linear-gradient(145deg, #666666, #888888);
+            color: white;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            box-shadow:
+                inset 2px 2px 5px rgba(0, 0, 0, 0.3),
+                inset -2px -2px 5px rgba(150, 150, 150, 0.1),
+                3px 3px 8px rgba(136, 136, 136, 0.3);
+            transform: translateY(2px);
+        }
+
+        /* Hover effect */
+        .radio-inputs .radio:hover .name {
+            background: linear-gradient(145deg, #555555, #444444);
+            transform: translateY(-1px);
+            box-shadow:
+                4px 4px 8px rgba(0, 0, 0, 0.3),
+                -4px -4px 8px rgba(100, 100, 100, 0.1);
+        }
+
+        .radio-inputs .radio:hover input:checked + .name {
+            transform: translateY(1px);
+        }
+
+        /* Theme Switcher */
+        .theme-switcher {
+            position: relative;
+            display: inline-block;
+        }
+
+        .theme-toggle {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            backdrop-filter: blur(12px);
+            box-shadow:
+                inset 1px 1px 4px rgba(255, 255, 255, 0.2),
+                inset -1px -1px 6px rgba(0, 0, 0, 0.3),
+                0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+            box-shadow:
+                0 0 20px rgba(255, 255, 255, 0.2),
+                inset 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: #e5e5e5;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover svg {
+            fill: #ffffff;
+            transform: rotate(90deg);
+        }
+
+        .theme-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 8px;
+            padding: 10px;
+            min-width: 150px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .theme-switcher:hover .theme-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 5px;
+        }
+
+        .theme-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .theme-default .theme-color {
+            background: linear-gradient(135deg, #cccccc, #aaaaaa);
+        }
+
+        .theme-yellow .theme-color {
+            background: linear-gradient(135deg, #ffcc00, #ffaa00);
+        }
+
+        .theme-blue .theme-color {
+            background: linear-gradient(135deg, #4488ff, #0066cc);
+        }
+
+        .theme-midnight .theme-color {
+            background: linear-gradient(135deg, #6633cc, #330099);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            padding: 100px 50px 50px;
+            min-height: 100vh;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Home Tab */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 5em;
+            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            position: relative;
+        }
+
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            color: #cccccc;
+            margin-bottom: 40px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #cccccc;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        /* Updated Button Style with Gray Theme */
+        .btn {
+            display: flex;
+            align-items: center;
+            font-family: inherit;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 17px;
+            padding: 0.8em 1.3em 0.8em 0.9em;
+            color: white;
+            background: linear-gradient(145deg, #555555, #444444);
+            border: none;
+            letter-spacing: 0.05em;
+            border-radius: 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow:
+                3px 3px 6px rgba(0, 0, 0, 0.3),
+                -3px -3px 6px rgba(100, 100, 100, 0.1);
+        }
+
+        .btn svg {
+            margin-right: 8px;
+            transform: rotate(30deg);
+            transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+            width: 20px;
+            height: 20px;
+            fill: #e5e5e5;
+        }
+
+        .btn span {
+            transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                4px 4px 8px rgba(0, 0, 0, 0.3),
+                -4px -4px 8px rgba(100, 100, 100, 0.1);
+            background: linear-gradient(145deg, #666666, #555555);
+        }
+
+        .btn:hover svg {
+            transform: translateX(5px) rotate(90deg);
+            fill: #ffffff;
+        }
+
+        .btn:hover span {
+            transform: translateX(7px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(145deg, #666666, #555555);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(145deg, #777777, #666666);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(145deg, #444444, #333333);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(145deg, #555555, #444444);
+        }
+
+        /* Card mới với animation */
+        .logo-card-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .hacker-card {
+            width: 320px;
+            height: 240px;
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(100, 100, 100, 0.3);
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .hacker-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.1) 50%, transparent 60%);
+            background-size: 200% 200%;
+            animation: shine 3s infinite;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-radius: 16px;
+        }
+
+        @keyframes shine {
+            0% { background-position: -100% -100%; }
+            100% { background-position: 200% 200%; }
+        }
+
+        .hacker-card:hover::before {
+            opacity: 1;
+        }
+
+        .hacker-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease;
+            border-radius: 16px;
+        }
+
+        .hacker-card:hover .card-image {
+            transform: scale(1.1);
+            filter: brightness(1.2) contrast(1.1);
+        }
+
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+            border-radius: 0 0 16px 16px;
+        }
+
+        .hacker-card:hover .card-overlay {
+            transform: translateY(0);
+        }
+
+        .card-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .card-subtitle {
+            font-size: 0.9em;
+            color: #cccccc;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .hacker-card:hover .card-subtitle {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid transparent;
+            border-radius: 16px;
+            background: var(--accent-gradient) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .hacker-card:hover .card-border {
+            opacity: 1;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            background: transparent;
+            text-align: center;
+        }
+
+        .stats h2 {
+            font-size: 3em;
+            margin-bottom: 40px;
+            color: #ffffff;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            color: #a0a0a0;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        /* Credits Section */
+        .credits-section {
+            padding: 80px 0;
+            background: transparent;
+            text-align: center;
+            border-top: 1px solid rgba(136, 136, 136, 0.2);
+        }
+
+        .credits-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .credits-section p {
+            font-size: 1.2em;
+            color: #a0a0a0;
+            margin-bottom: 40px;
+        }
+
+        .credits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .credit-card {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(136, 136, 136, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .credit-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffffff;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+        }
+
+        .credit-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+        }
+
+        .credit-info {
+            text-align: left;
+            flex: 1;
+        }
+
+        .credit-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .credit-role {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .credit-link {
+            color: #a0a0a0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .credit-link:hover {
+            color: #ffffff;
+        }
+
+        /* Premium Tab */
+        .premium h2 {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .premium-subtitle {
+            text-align: center;
+            margin-bottom: 60px;
+            color: #a0a0a0;
+            font-size: 1.2em;
+        }
+
+        .premium-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .premium-card {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(136, 136, 136, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .premium-card:hover::before {
+            opacity: 1;
+        }
+
+        .premium-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffffff;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .premium-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #cccccc;
+        }
+
+        .premium-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .premium-card p {
+            color: #a0a0a0;
+            line-height: 1.6;
+        }
+
+        /* Pricing Plans Section */
+        .pricing-section {
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .pricing-section h3 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #cccccc;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Flip Card Styles */
+        .flip-card {
+            background-color: transparent;
+            width: 250px;
+            height: 320px;
+            perspective: 1000px;
+            font-family: sans-serif;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .flip-card.popular {
+            position: relative;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .title {
+            font-size: 1.5em;
+            font-weight: 900;
+            text-align: center;
+            margin: 0;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            box-shadow: 0 8px 25px 0 rgba(0,0,0,0.3);
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border: 2px solid var(--primary-color);
+            border-radius: 1rem;
+            padding: 20px;
+        }
+
+        .flip-card-front {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            color: var(--primary-color);
+        }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, var(--primary-color) 0%, rgba(255,255,255,0.2) 100%);
+            color: white;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .plan-price {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .plan-features li {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .plan-features li::before {
+            content: "✓";
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        .buy-btn {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255,255,255,0.3);
+        }
+
+        /* Script Tab */
+        .script h2 {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 40px;
+            color: #ffffff;
+        }
+
+        .card {
+            padding: 1rem;
+            overflow: hidden;
+            border: 1px solid #c5c5c5;
+            border-radius: 12px;
+            background-color: #d9d9d92f;
+            backdrop-filter: blur(8px);
+            min-width: 344px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            position: relative;
+            z-index: 10;
+            border: 0.5px solid #525252;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .terminal {
+            display: flex;
+            flex-direction: column;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                "Liberation Mono", "Courier New", monospace;
+        }
+        .head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            overflow: hidden;
+            min-height: 40px;
+            padding-inline: 12px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            background-color: #202425;
+        }
+        .title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            height: 2.5rem;
+            user-select: none;
+            font-weight: 600;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #8e8e8e;
+        }
+        .title > svg {
+            height: 18px;
+            width: 18px;
+            margin-top: 2px;
+            color: #006adc;
+        }
+        .copy_toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem;
+            border: 0.65px solid #c1c2c5;
+            margin-left: auto;
+            border-radius: 6px;
+            background-color: #202425;
+            color: #8e8e8e;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .copy_toggle:hover {
+            background-color: #2a2d2e;
+            border-color: #ffffff;
+        }
+        .copy_toggle > svg {
+            width: 20px;
+            height: 20px;
+        }
+        .copy_toggle:active > svg > path,
+        .copy_toggle:focus-within > svg > path {
+            animation: clipboard-check 500ms linear forwards;
+        }
+        .body {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border-bottom-right-radius: 8px;
+            border-bottom-left-radius: 8px;
+            overflow-x: auto;
+            padding: 1rem;
+            line-height: 19px;
+            color: white;
+            background-color: black;
+            white-space: nowrap;
+        }
+        .pre {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            text-wrap: nowrap;
+            white-space: pre;
+            background-color: transparent;
+            overflow: hidden;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        .pre code:nth-child(1) {
+            color: #575757;
+        }
+        .pre code:nth-child(2) {
+            color: #e34ba9;
+        }
+        .cmd {
+            height: 19px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+        }
+        .cmd::before {
+            content: attr(data-cmd);
+            position: relative;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            background-color: transparent;
+            animation: inputs 8s steps(22) infinite;
+        }
+        .cmd::after {
+            content: "";
+            position: relative;
+            display: block;
+            height: 100%;
+            overflow: hidden;
+            background-color: transparent;
+            border-right: 0.15em solid #e34ba9;
+            animation: cursor 0.5s step-end infinite alternate, blinking 0.5s infinite;
+        }
+
+        @keyframes blinking {
+            20%,
+            80% {
+                transform: scaleY(1);
+            }
+            50% {
+                transform: scaleY(0);
+            }
+        }
+        @keyframes cursor {
+            50% {
+                border-right-color: transparent;
+            }
+        }
+        @keyframes inputs {
+            0%,
+            100% {
+                width: 0;
+            }
+            10%,
+            90% {
+                width: 58px;
+            }
+            30%,
+            70% {
+                width: 215px;
+                max-width: max-content;
+            }
+        }
+        @keyframes clipboard-check {
+            100% {
+                color: #fff;
+                d: path(
+                    "M 9 5 H 7 a 2 2 0 0 0 -2 2 v 12 a 2 2 0 0 0 2 2 h 10 a 2 2 0 0 0 2 -2 V 7 a 2 2 0 0 0 -2 -2 h -2 M 9 5 a 2 2 0 0 0 2 2 h 2 a 2 2 0 0 0 2 -2 M 9 5 a 2 2 0 0 1 2 -2 h 2 a 2 2 0 0 1 2 2 m -6 9 l 2 2 l 4 -4"
+                );
+            }
+        }
+
+        /* Supported Games Section */
+        .supported-games {
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .supported-games h3 {
+            font-size: 2em;
+            margin-bottom: 40px;
+            color: #cccccc;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Game Card Design */
+        .game-card {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            border-radius: 16px;
+            background: #3d3c3d;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: white;
+            filter: blur(50px);
+            left: -50%;
+            top: -50%;
+            opacity: 0.1;
+            transition: all 0.4s ease;
+        }
+
+        .game-card:hover::before {
+            opacity: 0.2;
+            transform: rotate(10deg);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.1);
+        }
+
+        .game-image {
+            width: 100%;
+            height: 70%;
+            object-fit: cover;
+            border-radius: 16px 16px 0 0;
+            transition: all 0.4s ease;
+        }
+
+        .game-card:hover .game-image {
+            transform: scale(1.1);
+            filter: brightness(1.1);
+        }
+
+        .game-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(50, 49, 50, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 0 0 16px 16px;
+            transform: translateY(0);
+            transition: all 0.4s ease;
+        }
+
+        .game-card:hover .game-content {
+            background: rgba(50, 49, 50, 0.98);
+        }
+
+        .game-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .game-status {
+            font-size: 0.9em;
+            color: #00ff88;
+            font-weight: 500;
+        }
+
+        .game-status.offline {
+            color: #ff4444;
+        }
+
+        /* FAQ Tab */
+        .faq h2 {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .faq-subtitle {
+            text-align: center;
+            margin-bottom: 60px;
+            color: #a0a0a0;
+            font-size: 1.2em;
+        }
+
+        .faq-item {
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(136, 136, 136, 0.2);
+            padding-bottom: 20px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .faq-question {
+            font-size: 1.3em;
+            color: #ffffff;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            color: #a0a0a0;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Features Section in FAQ */
+        .features-section {
+            margin-top: 80px;
+        }
+
+        .features-section h3 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #cccccc;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(136, 136, 136, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffffff;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #cccccc;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .feature-card p {
+            color: #a0a0a0;
+            line-height: 1.6;
+        }
+
+        /* Star Rating - Completely remade */
+        .rating-section {
+            padding: 80px 0;
+            background: transparent;
+            text-align: center;
+            border-top: 1px solid rgba(136, 136, 136, 0.2);
+            margin-top: 60px;
+        }
+
+        .rating-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .rating-section p {
+            font-size: 1.2em;
+            color: #a0a0a0;
+            margin-bottom: 40px;
+        }
+
+        .rating {
+            display: inline-flex;
+            flex-direction: row-reverse;
+            gap: 5px;
+        }
+
+        .rating input {
+            display: none;
+        }
+
+        .rating label {
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+        }
+
+        .rating label:before {
+            content: "★";
+            font-size: 40px;
+            color: #666;
+            transition: color 0.2s;
+        }
+
+        .rating input:checked ~ label:before,
+        .rating:not(:checked) label:hover:before,
+        .rating:not(:checked) label:hover ~ label:before {
+            color: #ffb300;
+        }
+
+        .rating input:checked + label:before {
+            color: #ffb300;
+            text-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
+        }
+
+        footer {
+            padding: 40px 50px;
+            background: #0a0a0a;
+            text-align: center;
+            border-top: 1px solid rgba(136, 136, 136, 0.2);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: #cccccc;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #a0a0a0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #cccccc;
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(136, 136, 136, 0.2);
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-center {
+                order: 2;
+                width: 100%;
+            }
+
+            .radio-inputs {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 3em;
+            }
+
+            .tab-content {
+                padding: 100px 20px 50px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .hacker-card {
+                width: 280px;
+                height: 210px;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .rating label {
+                width: 30px;
+                height: 30px;
+            }
+
+            .rating label:before {
+                font-size: 30px;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .popular-badge {
+                font-size: 0.7em;
+                padding: 6px 15px;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .credits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .credit-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .credit-info {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body class="theme-default">
+    <div class="stars" id="stars"></div>
+    <div class="snow-container" id="snow"></div>
+
+    <nav>
+        <div class="logo">
+            <img src="https://sf-static.upanhlaylink.com/img/image_20251126f64f6628475a861f8270c06c196ebd0a.jpg" alt="Hacker Hub Logo" class="logo-img">
+        </div>
+        
+        <!-- Navigation Center -->
+        <div class="nav-center">
+            <!-- Updated Navigation with Gray Theme -->
+            <div class="radio-inputs">
+                <div class="radio">
+                    <input type="radio" id="nav-home" name="nav-radio" checked>
+                    <label for="nav-home" class="name">Home</label>
+                </div>
+                <div class="radio">
+                    <input type="radio" id="nav-premium" name="nav-radio">
+                    <label for="nav-premium" class="name">Premium</label>
+                </div>
+                <div class="radio">
+                    <input type="radio" id="nav-script" name="nav-radio">
+                    <label for="nav-script" class="name">Script</label>
+                </div>
+                <div class="radio">
+                    <input type="radio" id="nav-faq" name="nav-radio">
+                    <label for="nav-faq" class="name">FAQ</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Theme Switcher -->
+        <div class="theme-switcher">
+            <div class="theme-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <circle cx="12" cy="12" r="4"></circle>
+                </svg>
+            </div>
+            <div class="theme-dropdown">
+                <div class="theme-option theme-default" data-theme="default">
+                    <div class="theme-color"></div>
+                    <span>Default</span>
+                </div>
+                <div class="theme-option theme-yellow" data-theme="yellow">
+                    <div class="theme-color"></div>
+                    <span>Yellow</span>
+                </div>
+                <div class="theme-option theme-blue" data-theme="blue">
+                    <div class="theme-color"></div>
+                    <span>Blue</span>
+                </div>
+                <div class="theme-option theme-midnight" data-theme="midnight">
+                    <div class="theme-color"></div>
+                    <span>Midnight</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Tab -->
+    <section id="home-tab" class="tab-content active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>HACKER HUB</h1>
+                <p class="hero-subtitle">Universal Script</p>
+                <p>The ultimate solution for undetected, stable, and performant automation</p>
+
+                <div class="cta-buttons">
+                    <a href="#premium-tab" class="btn btn-primary" data-tab="premium">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                        </svg>
+                        <span>Get Started</span>
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                        </svg>
+                        <span>Join Discord</span>
+                    </a>
+                </div>
+                
+                <!-- Card mới với animation -->
+                <div class="logo-card-container">
+                    <div class="hacker-card">
+                        <img src="https://sf-static.upanhlaylink.com/img/image_202511262bf8b7d8b666ef8d8bcdb2446dad9828.jpg" alt="Hacker Logo" class="card-image">
+                        <div class="card-border"></div>
+                        <div class="card-overlay">
+                            <div class="card-title">HACKER HUB</div>
+                            <div class="card-subtitle">Universal Script Platform</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section with 6 items -->
+        <div class="stats">
+            <h2>About</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">500K+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Uptime</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1M+</div>
+                    <div class="stat-label">Downloads</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">&lt; 1s</div>
+                    <div class="stat-label">Response Time</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Data Secure</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Credits Section -->
+        <div class="credits-section">
+            <h2>Credits</h2>
+            <p>Thank you to everyone who has contributed to making Hacker Hub possible</p>
+            
+            <div class="credits-grid">
+                <div class="credit-card">
+                    <img src="https://sf-static.upanhlaylink.com/img/image_20251127b45494911a1dde0ef00a964e9d5788e6.jpg" alt="TungfVN" class="credit-avatar">
+                    <div class="credit-info">
+                        <div class="credit-name">TungfVN</div>
+                        <div class="credit-role">Owner Hacker Hub</div>
+                        <a href="https://guns.lol/tungfvn" target="_blank" class="credit-link">
+                            Visit ☑
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Star Rating Section -->
+        <div class="rating-section">
+            <h2>Rate Our Service</h2>
+            <p>Help us improve by rating your experience with Hacker Hub</p>
+            <div class="rating">
+                <input type="radio" id="star5" name="rate" value="5">
+                <label for="star5" title="5 stars"></label>
+                <input type="radio" id="star4" name="rate" value="4">
+                <label for="star4" title="4 stars"></label>
+                <input type="radio" id="star3" name="rate" value="3">
+                <label for="star3" title="3 stars"></label>
+                <input type="radio" id="star2" name="rate" value="2">
+                <label for="star2" title="2 stars"></label>
+                <input type="radio" id="star1" name="rate" value="1">
+                <label for="star1" title="1 star"></label>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Tab -->
+    <section id="premium-tab" class="tab-content">
+        <div class="premium">
+            <h2>Premium Features</h2>
+            <p class="premium-subtitle">Unlock the full potential with our premium subscription</p>
+            <div class="premium-grid">
+                <div class="premium-card">
+                    <div class="premium-icon">🚀</div>
+                    <h3>Priority Access</h3>
+                    <p>Get early access to new features, scripts, and updates before anyone else. Premium users receive priority treatment in all aspects of our service.</p>
+                </div>
+                <div class="premium-card">
+                    <div class="premium-icon">🛡️</div>
+                    <h3>Enhanced Security</h3>
+                    <p>Advanced security features and dedicated protection layers to ensure your account remains safe while using our utilities.</p>
+                </div>
+                <div class="premium-card">
+                    <div class="premium-icon">⚡</div>
+                    <h3>Maximum Performance</h3>
+                    <p>Unlock the highest performance settings with optimized scripts that run faster and more efficiently than the standard versions.</p>
+                </div>
+                <div class="premium-card">
+                    <div class="premium-icon">🎮</div>
+                    <h3>Exclusive Scripts</h3>
+                    <p>Access to premium-only scripts and features not available to free users, giving you a competitive edge in supported games.</p>
+                </div>
+            </div>
+
+            <!-- Pricing Plans Section -->
+            <div class="pricing-section">
+                <h3>Choose Your Plan</h3>
+                <div class="pricing-grid">
+                    <!-- 1 Week Plan -->
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="title">1 WEEK</p>
+                                <div class="plan-price">$1</div>
+                                <ul class="plan-features">
+                                    <li>Full Access</li>
+                                    <li>All Games</li>
+                                    <li>Priority Support</li>
+                                    <li>Perfect for testing</li>
+                                </ul>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="title">1 WEEK</p>
+                                <div class="plan-price">$1</div>
+                                <p>Try all features</p>
+                                <a href="https://maihuytung.mysellauth.com/product/maihuytung" target="_blank" class="buy-btn">Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 1 Month Plan -->
+                    <div class="flip-card popular">
+                        <div class="popular-badge">MOST POPULAR</div>
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="title">1 MONTH</p>
+                                <div class="plan-price">$3</div>
+                                <ul class="plan-features">
+                                    <li>Full Access</li>
+                                    <li>All Games</li>
+                                    <li>Priority Support</li>
+                                    <li>Updates Included</li>
+                                    <li>Best Value</li>
+                                </ul>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="title">1 MONTH</p>
+                                <div class="plan-price">$3</div>
+                                <p>Most Popular</p>
+                                <a href="https://maihuytung.mysellauth.com/product/maihuytung" target="_blank" class="buy-btn">Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lifetime Plan -->
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="title">LIFETIME</p>
+                                <div class="plan-price">$7</div>
+                                <ul class="plan-features">
+                                    <li>Full Access</li>
+                                    <li>All Games</li>
+                                    <li>Priority Support</li>
+                                    <li>Lifetime Updates</li>
+                                    <li>Best Deal</li>
+                                </ul>
+                            </div>
+                            <div class="flip-card-back">
+                                <p class="title">LIFETIME</p>
+                                <div class="plan-price">$7</div>
+                                <p>One-time Payment</p>
+                                <a href="https://maihuytung.mysellauth.com/product/maihuytung" target="_blank" class="buy-btn">Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-buttons" style="margin-top: 60px;">
+                <a href="https://maihuytung.mysellauth.com/product/maihuytung" target="_blank" class="btn btn-primary">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                    </svg>
+                    <span>Get Premium</span>
+                </a>
+                <a href="#" class="btn btn-secondary">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                    </svg>
+                    <span>Learn More</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Script Tab -->
+    <section id="script-tab" class="tab-content">
+        <div class="script">
+            <h2>Copy Script</h2>
+            <div class="card">
+                <div class="wrap">
+                    <div class="terminal">
+                        <div class="head">
+                            <div class="title">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="m18 16 4-4-4-4"></path>
+                                    <path d="m6 8-4 4 4 4"></path>
+                                    <path d="m14.5 4-5 16"></path>
+                                </svg>
+                                script.lua
+                            </div>
+                            <div class="copy_toggle" onclick="copyScript()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="body">
+                            <div class="pre">
+                                <code>loadstring(game:HttpGet("https://raw.githubusercontent.com/HackerHub/Scripts/main/</code>
+                                <code>universal.lua"))()</code>
+                            </div>
+                            <div class="cmd" data-cmd="HackerHub Universal Script"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Supported Games Section -->
+            <div class="supported-games">
+                <h3>Supported Games</h3>
+                <div class="games-grid">
+                    <!-- Blox Fruits -->
+                    <div class="game-card">
+                        <img src="https://sf-static.upanhlaylink.com/img/image_20251126a02e8b7206d134bb5edbf583ba0d9898.jpg" alt="Blox Fruits" class="game-image">
+                        <div class="game-content">
+                            <div class="game-title">Blox Fruits</div>
+                            <div class="game-status">Fully Supported</div>
+                        </div>
+                    </div>
+
+                    <!-- Dead Rails -->
+                    <div class="game-card">
+                        <img src="https://sf-static.upanhlaylink.com/img/image_20251126b591653fa9a4b0ddcb540f2038aac2cb.jpg" alt="Dead Rails" class="game-image">
+                        <div class="game-content">
+                            <div class="game-title">Dead Rails</div>
+                            <div class="game-status">Fully Supported</div>
+                        </div>
+                    </div>
+
+                    <!-- All in One -->
+                    <div class="game-card">
+                        <img src="https://sf-static.upanhlaylink.com/img/image_2025112686edf6c650ac628fdc897a3fccdb8ebd.jpg" alt="All in One" class="game-image">
+                        <div class="game-content">
+                            <div class="game-title">All in One</div>
+                            <div class="game-status">Fully Supported</div>
+                        </div>
+                    </div>
+
+                    <!-- Peta Peta -->
+                    <div class="game-card">
+                        <img src="https://sf-static.upanhlaylink.com/img/image_202511266181c2c5b26ff02fb002401b35dcf0db.jpg" alt="Peta Peta" class="game-image">
+                        <div class="game-content">
+                            <div class="game-title">Peta Peta</div>
+                            <div class="game-status">Fully Supported</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Tab -->
+    <section id="faq-tab" class="tab-content">
+        <div class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <p class="faq-subtitle">Got questions? We've got answers. Find everything you need to know about Hacker Hub.</p>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is Hacker Hub safe to use?</div>
+                <div class="faq-answer">Yes, Hacker Hub is designed with security as a top priority. Our utilities are fully undetected and regularly updated to ensure your safety while using our tools.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Which platforms are supported?</div>
+                <div class="faq-answer">Hacker Hub currently supports Windows 10 and 11. We are working on expanding to other platforms in the future.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Do I need to pay for Hacker Hub?</div>
+                <div class="faq-answer">Hacker Hub offers both free and premium versions. The free version includes basic features, while the premium version unlocks advanced functionality and priority support.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I get support?</div>
+                <div class="faq-answer">You can get support through our official Discord server where our team and community members are available to help with any issues you may encounter.</div>
+            </div>
+
+            <!-- Features Section in FAQ -->
+            <div class="features-section">
+                <h3>Why Choose Hacker Hub?</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Undetected</h3>
+                        <p>Fully undetected by games and the platform itself, giving you a safe experience with our utilities. Thanks to our dedicated developers constantly monitoring for detections and working proactively to maintain security, you can use our tools with confidence and peace of mind.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Performance</h3>
+                        <p>Lightning-fast execution with exceptional performance optimization. Our utilities are engineered for speed and efficiency, delivering rapid results while maintaining minimal resource usage, so you can enjoy smooth operation without compromising your devices performance.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h3>Stable</h3>
+                        <p>A stable experience is provided by our utilities, with minimal crashes or issues. Our responsive support team actively receives reports of any problems to immediately notify our developers, ensuring quick resolutions and maintaining the highest quality standards for all users.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📜</div>
+                        <h3>Script Support</h3>
+                        <p>Amazing script support which allows you to run nearly every script available, with limitations only being the script itself and its current status. Any reports of scripts not working are addressed actively by our development team, ensuring maximum compatibility and functionality.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>HACKER HUB</h3>
+                <p>Universal Script</p>
+                <div class="cta-buttons" style="margin-top: 20px; justify-content: flex-start;">
+                    <a href="#" class="btn btn-secondary" style="padding: 0.8em 1.3em 0.8em 0.9em;">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                        </svg>
+                        <span>Join Discord</span>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>QUICK LINKS</h3>
+                <ul class="footer-links">
+                    <li><a href="#" data-tab="premium">Premium</a></li>
+                    <li><a href="#" data-tab="script">Script</a></li>
+                    <li><a href="#" data-tab="faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>SUPPORT</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Hacker Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Create snow effect
+        const snowContainer = document.getElementById('snow');
+        for (let i = 0; i < 40; i++) {
+            const snow = document.createElement('div');
+            snow.className = 'snow';
+            snow.style.left = Math.random() * 100 + '%';
+            snow.style.animationDuration = Math.random() * 3 + 5 + 's';
+            snow.style.animationDelay = Math.random() * 5 + 's';
+            snow.style.width = Math.random() * 6 + 4 + 'px';
+            snow.style.height = snow.style.width;
+            snowContainer.appendChild(snow);
+        }
+
+        // Tab functionality
+        const navRadios = document.querySelectorAll('.radio-inputs input');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        // Function to switch tabs
+        function switchTab(tabName) {
+            // Hide all tab contents
+            tabContents.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            const targetTab = document.getElementById(`${tabName}-tab`);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
+            
+            // Update navigation
+            navRadios.forEach(radio => {
+                radio.checked = radio.id === `nav-${tabName}`;
+            });
+        }
+
+        // Navigation click events
+        navRadios.forEach(radio => {
+            radio.addEventListener('click', function() {
+                const targetTab = this.id.replace('nav-', '');
+                switchTab(targetTab);
+            });
+        });
+
+        // Footer link click events
+        document.querySelectorAll('.footer-links a[data-tab]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetTab = this.getAttribute('data-tab');
+                switchTab(targetTab);
+            });
+        });
+
+        // Button click events for tab switching
+        document.querySelectorAll('a[data-tab]').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetTab = this.getAttribute('data-tab');
+                switchTab(targetTab);
+            });
+        });
+
+        // Copy script function
+        function copyScript() {
+            const scriptText = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/HackerHub/Scripts/main/universal.lua"))()';
+            navigator.clipboard.writeText(scriptText).then(() => {
+                const copyToggle = document.querySelector('.copy_toggle');
+                copyToggle.style.backgroundColor = '#00ff88';
+                setTimeout(() => {
+                    copyToggle.style.backgroundColor = '#202425';
+                }, 1000);
+            });
+        }
+
+        // FAQ functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // Theme switcher functionality
+        const themeOptions = document.querySelectorAll('.theme-option');
+        
+        themeOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const theme = this.getAttribute('data-theme');
+                document.body.className = `theme-${theme}`;
+            });
+        });
+
+        // Star rating functionality
+        const starInputs = document.querySelectorAll('.rating input');
+        
+        starInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                const value = this.value;
+                console.log('Selected rating:', value);
+            });
+        });
+    </script>
+</body>
+</html>
