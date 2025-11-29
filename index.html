@@ -1624,6 +1624,75 @@
             text-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
         }
 
+        /* Partner Section */
+        .partner-section {
+            padding: 80px 0;
+            background: transparent;
+            text-align: center;
+            border-top: 1px solid rgba(136, 136, 136, 0.2);
+        }
+
+        .partner-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .partner-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .partner-info {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(136, 136, 136, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            width: 100%;
+        }
+
+        .partner-info:hover {
+            transform: translateY(-5px);
+            border-color: #ffffff;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+        }
+
+        .partner-name {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .partner-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .partner-link:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .partner-email {
+            color: #a0a0a0;
+            font-size: 1.1em;
+        }
+
         footer {
             padding: 40px 50px;
             background: #0a0a0a;
@@ -1778,6 +1847,47 @@
             }
         }
 
+        /* Footer Logo Section */
+        .footer-logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+            filter: brightness(0.9);
+            border: 2px solid transparent;
+        }
+
+        .footer-logo:hover {
+            transform: scale(1.1) rotate(5deg);
+            filter: brightness(1.2) drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer-brand h3 {
+            color: #cccccc;
+            margin-bottom: 5px;
+            font-size: 1.5em;
+        }
+
+        .footer-brand p {
+            color: #a0a0a0;
+            font-size: 0.9em;
+        }
+
         @media (max-width: 768px) {
             nav {
                 padding: 12px 20px;
@@ -1865,6 +1975,15 @@
 
             .credit-info {
                 text-align: center;
+            }
+
+            .footer-logo-section {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .footer-brand {
+                align-items: center;
             }
         }
 
@@ -2434,8 +2553,13 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>HACKER HUB</h3>
-                <p>Universal Script</p>
+                <div class="footer-logo-section">
+                    <img src="https://sf-static.upanhlaylink.com/img/image_20251126f64f6628475a861f8270c06c196ebd0a.jpg" alt="Hacker Hub Logo" class="footer-logo">
+                    <div class="footer-brand">
+                        <h3>HACKER HUB</h3>
+                        <p>Universal Script</p>
+                    </div>
+                </div>
                 <div class="cta-buttons" style="margin-top: 20px; justify-content: flex-start;">
                     <a href="#" class="btn btn-secondary" style="padding: 0.8em 1.3em 0.8em 0.9em;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -2464,6 +2588,13 @@
                     <li><a href="#">Documentation</a></li>
                     <li><a href="#">Contact Us</a></li>
                     <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>PARTNER</h3>
+                <ul class="footer-links">
+                    <li><a href="https://www.youtube.com/@TungfVN" target="_blank">TungfVN</a></li>
+                    <li><a href="mailto:tungytno1@gmail.com">tungytno1@gmail.com</a></li>
                 </ul>
             </div>
         </div>
