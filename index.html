@@ -38,30 +38,30 @@
             scroll-behavior: smooth;
         }
 
-        /* Thanh điều hướng mới - trong suốt và đẹp hơn */
+        /* Thanh điều hướng mới - trong suốt hơn */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 50px;
-            background: rgba(10, 10, 10, 0.7);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: rgba(5, 5, 5, 0.5);
+            backdrop-filter: blur(25px) saturate(200%);
+            -webkit-backdrop-filter: blur(25px) saturate(200%);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         nav.scrolled {
-            background: rgba(5, 5, 5, 0.85);
-            backdrop-filter: blur(25px) saturate(200%);
-            -webkit-backdrop-filter: blur(25px) saturate(200%);
+            background: rgba(3, 3, 3, 0.7);
+            backdrop-filter: blur(30px) saturate(250%);
+            -webkit-backdrop-filter: blur(30px) saturate(250%);
             padding: 12px 50px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .logo {
@@ -94,23 +94,23 @@
             flex: 1;
         }
 
-        /* New Navigation với thiết kế trong suốt */
+        /* New Navigation với thiết kế trong suốt hơn */
         .radio-inputs {
             position: relative;
             display: flex;
             flex-wrap: wrap;
             border-radius: 16px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
             box-sizing: border-box;
             box-shadow: 
-                0 4px 20px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                0 4px 20px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
             padding: 0.4rem;
             width: fit-content;
             font-size: 14px;
             gap: 0.4rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
 
         .radio-inputs .radio {
@@ -131,7 +131,7 @@
             border-radius: 12px;
             border: none;
             padding: 0.8rem 1.4rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.7);
             font-weight: 500;
             font-family: inherit;
             background: transparent;
@@ -148,7 +148,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
             border-radius: 12px;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -157,10 +157,10 @@
         .radio-inputs .radio input:checked + .name {
             color: #ffffff;
             font-weight: 600;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.12);
             box-shadow: 
-                0 4px 15px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                0 4px 15px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
             transform: translateY(-1px);
         }
 
@@ -170,13 +170,108 @@
 
         .radio-inputs .radio:hover .name {
             color: #ffffff;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             transform: translateY(-2px);
         }
 
         .radio-inputs .radio:hover input:checked + .name {
             transform: translateY(-1px);
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 8px;
+        }
+
+        .mobile-menu-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.8);
+            margin: 2px 0;
+            transition: all 0.3s ease;
+            border-radius: 1px;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(25px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            z-index: 999;
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-items {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .mobile-nav-item {
+            padding: 15px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .mobile-nav-item:hover,
+        .mobile-nav-item.active {
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            transform: translateY(-2px);
         }
 
         /* Theme Switcher mới */
@@ -689,7 +784,7 @@
             margin-top: 10px;
         }
 
-        /* Premium Grid với 6 mục */
+        /* Premium Grid với 6 mục - Cải thiện căn chỉnh */
         .premium-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -707,6 +802,9 @@
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .premium-card::before {
@@ -746,6 +844,7 @@
         .premium-card p {
             color: #a0a0a0;
             line-height: 1.6;
+            flex-grow: 1;
         }
 
         /* Các phần còn lại giữ nguyên */
@@ -1417,6 +1516,9 @@
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .feature-card::before {
@@ -1456,6 +1558,7 @@
         .feature-card p {
             color: #a0a0a0;
             line-height: 1.6;
+            flex-grow: 1;
         }
 
         /* Star Rating */
@@ -1678,18 +1781,16 @@
         @media (max-width: 768px) {
             nav {
                 padding: 12px 20px;
-                flex-direction: column;
+                flex-direction: row;
                 gap: 15px;
             }
 
             .nav-center {
-                order: 2;
-                width: 100%;
+                display: none;
             }
 
-            .radio-inputs {
-                width: 100%;
-                justify-content: center;
+            .mobile-menu-toggle {
+                display: flex;
             }
 
             .hero h1 {
@@ -1813,6 +1914,13 @@
             </div>
         </div>
 
+        <!-- Mobile Menu Toggle -->
+        <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
         <!-- Theme Switcher -->
         <div class="theme-switcher">
             <div class="theme-toggle">
@@ -1841,6 +1949,16 @@
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-nav-items">
+            <a href="#" class="mobile-nav-item active" data-tab="home">Home</a>
+            <a href="#" class="mobile-nav-item" data-tab="premium">Premium</a>
+            <a href="#" class="mobile-nav-item" data-tab="script">Script</a>
+            <a href="#" class="mobile-nav-item" data-tab="faq">FAQ</a>
+        </div>
+    </div>
 
     <!-- Home Tab -->
     <section id="home-tab" class="tab-content active">
@@ -2418,6 +2536,18 @@
             navRadios.forEach(radio => {
                 radio.checked = radio.id === `nav-${tabName}`;
             });
+            
+            // Update mobile menu
+            document.querySelectorAll('.mobile-nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-tab') === tabName) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // Close mobile menu
+            document.getElementById('mobile-menu').classList.remove('active');
+            document.getElementById('mobile-menu-toggle').classList.remove('active');
         }
 
         // Navigation click events
@@ -2484,6 +2614,32 @@
                 const value = this.value;
                 console.log('Selected rating:', value);
             });
+        });
+
+        // Mobile menu functionality
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Mobile menu item click events
+        document.querySelectorAll('.mobile-nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetTab = this.getAttribute('data-tab');
+                switchTab(targetTab);
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+            }
         });
     </script>
 </body>
