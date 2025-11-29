@@ -38,30 +38,243 @@
             scroll-behavior: smooth;
         }
 
-        body.theme-default {
-            --accent-color: #cccccc;
-            --accent-gradient: linear-gradient(to right, #888888, #aaaaaa);
-            --primary-color: #cccccc;
+        /* Thanh điều hướng mới - trong suốt và đẹp hơn */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        body.theme-yellow {
-            --accent-color: #ffcc00;
-            --accent-gradient: linear-gradient(to right, #ffcc00, #ffdd44);
-            --primary-color: #ffcc00;
+        nav.scrolled {
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(25px) saturate(200%);
+            -webkit-backdrop-filter: blur(25px) saturate(200%);
+            padding: 12px 50px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        body.theme-blue {
-            --accent-color: #4488ff;
-            --accent-gradient: linear-gradient(to right, #4488ff, #66aaff);
-            --primary-color: #4488ff;
+        .logo {
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
         }
 
-        body.theme-midnight {
-            --accent-color: #6633cc;
-            --accent-gradient: linear-gradient(to right, #6633cc, #8855ee);
-            --primary-color: #6633cc;
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+            filter: brightness(0.9);
+            border: 2px solid transparent;
         }
 
+        .logo:hover .logo-img {
+            transform: scale(1.1) rotate(5deg);
+            filter: brightness(1.2) drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Navigation Center */
+        .nav-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+
+        /* New Navigation với thiết kế trong suốt */
+        .radio-inputs {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            box-sizing: border-box;
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            padding: 0.4rem;
+            width: fit-content;
+            font-size: 14px;
+            gap: 0.4rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .radio-inputs .radio {
+            flex: 1 1 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .radio-inputs .radio input {
+            display: none;
+        }
+
+        .radio-inputs .radio .name {
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            border: none;
+            padding: 0.8rem 1.4rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            font-family: inherit;
+            background: transparent;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            min-width: 90px;
+            position: relative;
+        }
+
+        .radio-inputs .radio .name::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .radio-inputs .radio input:checked + .name {
+            color: #ffffff;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .radio-inputs .radio input:checked + .name::before {
+            opacity: 1;
+        }
+
+        .radio-inputs .radio:hover .name {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .radio-inputs .radio:hover input:checked + .name {
+            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Theme Switcher mới */
+        .theme-switcher {
+            position: relative;
+            display: inline-block;
+        }
+
+        .theme-toggle {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 
+                0 6px 20px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .theme-toggle svg {
+            width: 22px;
+            height: 22px;
+            fill: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover svg {
+            fill: #ffffff;
+            transform: rotate(90deg);
+        }
+
+        .theme-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            padding: 12px;
+            min-width: 160px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .theme-switcher:hover .theme-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 4px;
+        }
+
+        .theme-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .theme-option:hover .theme-color {
+            transform: scale(1.1);
+        }
+
+        /* Các phần còn lại giữ nguyên */
         .stars {
             position: fixed;
             top: 0;
@@ -125,213 +338,28 @@
             }
         }
 
-        /* Navigation */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 50px;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(100, 100, 100, 0.2);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        body.theme-default {
+            --accent-color: #cccccc;
+            --accent-gradient: linear-gradient(to right, #888888, #aaaaaa);
+            --primary-color: #cccccc;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
+        body.theme-yellow {
+            --accent-color: #ffcc00;
+            --accent-gradient: linear-gradient(to right, #ffcc00, #ffdd44);
+            --primary-color: #ffcc00;
         }
 
-        .logo-img {
-            width: 45px;
-            height: 45px;
-            border-radius: 8px;
-            object-fit: cover;
-            transition: all 0.3s ease;
-            filter: brightness(0.9);
-            border: 2px solid transparent;
+        body.theme-blue {
+            --accent-color: #4488ff;
+            --accent-gradient: linear-gradient(to right, #4488ff, #66aaff);
+            --primary-color: #4488ff;
         }
 
-        .logo:hover .logo-img {
-            transform: scale(1.1) rotate(5deg);
-            filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Navigation Center */
-        .nav-center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex: 1;
-        }
-
-        /* New Navigation with Gray Theme */
-        .radio-inputs {
-            position: relative;
-            display: flex;
-            flex-wrap: wrap;
-            border-radius: 1rem;
-            background: linear-gradient(145deg, #333333, #555555);
-            box-sizing: border-box;
-            box-shadow:
-                5px 5px 15px rgba(0, 0, 0, 0.3),
-                -5px -5px 15px rgba(100, 100, 100, 0.1);
-            padding: 0.5rem;
-            width: fit-content;
-            font-size: 14px;
-            gap: 0.5rem;
-        }
-
-        .radio-inputs .radio {
-            flex: 1 1 auto;
-            text-align: center;
-            position: relative;
-        }
-
-        .radio-inputs .radio input {
-            display: none;
-        }
-
-        .radio-inputs .radio .name {
-            display: flex;
-            cursor: pointer;
-            align-items: center;
-            justify-content: center;
-            border-radius: 0.7rem;
-            border: none;
-            padding: 0.7rem 1.2rem;
-            color: #e5e5e5;
-            font-weight: 500;
-            font-family: inherit;
-            background: linear-gradient(145deg, #444444, #333333);
-            box-shadow:
-                3px 3px 6px rgba(0, 0, 0, 0.3),
-                -3px -3px 6px rgba(100, 100, 100, 0.1);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-            min-width: 80px;
-        }
-
-        .radio-inputs .radio input:checked + .name {
-            background: linear-gradient(145deg, #666666, #888888);
-            color: white;
-            font-weight: 600;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-            box-shadow:
-                inset 2px 2px 5px rgba(0, 0, 0, 0.3),
-                inset -2px -2px 5px rgba(150, 150, 150, 0.1),
-                3px 3px 8px rgba(136, 136, 136, 0.3);
-            transform: translateY(2px);
-        }
-
-        /* Hover effect */
-        .radio-inputs .radio:hover .name {
-            background: linear-gradient(145deg, #555555, #444444);
-            transform: translateY(-1px);
-            box-shadow:
-                4px 4px 8px rgba(0, 0, 0, 0.3),
-                -4px -4px 8px rgba(100, 100, 100, 0.1);
-        }
-
-        .radio-inputs .radio:hover input:checked + .name {
-            transform: translateY(1px);
-        }
-
-        /* Theme Switcher */
-        .theme-switcher {
-            position: relative;
-            display: inline-block;
-        }
-
-        .theme-toggle {
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 8px;
-            backdrop-filter: blur(12px);
-            box-shadow:
-                inset 1px 1px 4px rgba(255, 255, 255, 0.2),
-                inset -1px -1px 6px rgba(0, 0, 0, 0.3),
-                0 4px 12px rgba(0, 0, 0, 0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(1.05);
-            box-shadow:
-                0 0 20px rgba(255, 255, 255, 0.2),
-                inset 0 0 10px rgba(255, 255, 255, 0.1);
-        }
-
-        .theme-toggle svg {
-            width: 24px;
-            height: 24px;
-            fill: #e5e5e5;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover svg {
-            fill: #ffffff;
-            transform: rotate(90deg);
-        }
-
-        .theme-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 10px;
-            background: rgba(20, 20, 20, 0.95);
-            backdrop-filter: blur(15px);
-            border-radius: 8px;
-            padding: 10px;
-            min-width: 150px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            z-index: 1001;
-        }
-
-        .theme-switcher:hover .theme-dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .theme-option {
-            display: flex;
-            align-items: center;
-            padding: 8px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin-bottom: 5px;
-        }
-
-        .theme-option:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .theme-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            margin-right: 10px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+        body.theme-midnight {
+            --accent-color: #6633cc;
+            --accent-gradient: linear-gradient(to right, #6633cc, #8855ee);
+            --primary-color: #6633cc;
         }
 
         .theme-default .theme-color {
@@ -353,7 +381,7 @@
         /* Tab Content */
         .tab-content {
             display: none;
-            padding: 100px 50px 50px;
+            padding: 120px 50px 50px;
             min-height: 100vh;
             animation: fadeIn 0.8s ease;
         }
@@ -424,7 +452,7 @@
             margin-bottom: 60px;
         }
 
-        /* Updated Button Style with Gray Theme */
+        /* Updated Button Style */
         .btn {
             display: flex;
             align-items: center;
@@ -434,15 +462,14 @@
             font-size: 17px;
             padding: 0.8em 1.3em 0.8em 0.9em;
             color: white;
-            background: linear-gradient(145deg, #555555, #444444);
-            border: none;
+            background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 1px solid rgba(255,255,255,0.1);
             letter-spacing: 0.05em;
             border-radius: 16px;
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow:
-                3px 3px 6px rgba(0, 0, 0, 0.3),
-                -3px -3px 6px rgba(100, 100, 100, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .btn svg {
@@ -460,10 +487,9 @@
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 
-                4px 4px 8px rgba(0, 0, 0, 0.3),
-                -4px -4px 8px rgba(100, 100, 100, 0.1);
-            background: linear-gradient(145deg, #666666, #555555);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
+            border-color: rgba(255,255,255,0.2);
         }
 
         .btn:hover svg {
@@ -476,22 +502,22 @@
         }
 
         .btn-primary {
-            background: linear-gradient(145deg, #666666, #555555);
+            background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
         }
 
         .btn-primary:hover {
-            background: linear-gradient(145deg, #777777, #666666);
+            background: linear-gradient(145deg, rgba(255,255,255,0.2), rgba(255,255,255,0.12));
         }
 
         .btn-secondary {
-            background: linear-gradient(145deg, #444444, #333333);
+            background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
         }
 
         .btn-secondary:hover {
-            background: linear-gradient(145deg, #555555, #444444);
+            background: linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
         }
 
-        /* Card mới với animation */
+        /* Card */
         .logo-card-container {
             display: flex;
             justify-content: center;
@@ -609,7 +635,7 @@
             opacity: 1;
         }
 
-        /* Stats Section */
+        /* Stats Section với 10 mục */
         .stats {
             padding: 80px 0;
             background: transparent;
@@ -620,24 +646,41 @@
             font-size: 3em;
             margin-bottom: 40px;
             color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
+            gap: 30px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .stat-item {
-            padding: 20px;
+            padding: 25px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         .stat-number {
-            font-size: 3em;
+            font-size: 2.8em;
             font-weight: bold;
             color: var(--primary-color);
+            margin-bottom: 10px;
         }
 
         .stat-label {
@@ -646,7 +689,66 @@
             margin-top: 10px;
         }
 
-        /* Credits Section */
+        /* Premium Grid với 6 mục */
+        .premium-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .premium-card {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(136, 136, 136, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .premium-card:hover::before {
+            opacity: 1;
+        }
+
+        .premium-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffffff;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .premium-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #cccccc;
+        }
+
+        .premium-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .premium-card p {
+            color: #a0a0a0;
+            line-height: 1.6;
+        }
+
+        /* Các phần còn lại giữ nguyên */
         .credits-section {
             padding: 80px 0;
             background: transparent;
@@ -658,6 +760,10 @@
             font-size: 2.5em;
             margin-bottom: 20px;
             color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
 
         .credits-section p {
@@ -736,6 +842,10 @@
             font-size: 3em;
             margin-bottom: 20px;
             color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
 
         .premium-subtitle {
@@ -745,93 +855,44 @@
             font-size: 1.2em;
         }
 
-        .premium-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .premium-card {
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(136, 136, 136, 0.3);
-            border-radius: 20px;
-            padding: 40px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .premium-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .premium-card:hover::before {
-            opacity: 1;
-        }
-
-        .premium-card:hover {
-            transform: translateY(-10px);
-            border-color: #ffffff;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
-        }
-
-        .premium-icon {
-            font-size: 3em;
-            margin-bottom: 20px;
-            color: #cccccc;
-        }
-
-        .premium-card h3 {
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            color: #ffffff;
-        }
-
-        .premium-card p {
-            color: #a0a0a0;
-            line-height: 1.6;
-        }
-
-        /* Pricing Plans Section */
+        /* Fixed Pricing Plans Section */
         .pricing-section {
             margin-top: 80px;
             text-align: center;
+            width: 100%;
+            overflow: hidden;
         }
 
         .pricing-section h3 {
             font-size: 2.5em;
             margin-bottom: 40px;
             color: #cccccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
 
         .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
             gap: 30px;
             max-width: 900px;
             margin: 0 auto;
+            width: 100%;
         }
 
-        /* Flip Card Styles */
+        /* Fixed Flip Card Styles */
         .flip-card {
             background-color: transparent;
             width: 250px;
             height: 320px;
             perspective: 1000px;
             font-family: sans-serif;
-            margin: 0 auto;
+            margin: 0;
             position: relative;
+            flex-shrink: 0;
         }
 
         .flip-card.popular {
@@ -889,6 +950,7 @@
             border: 2px solid var(--primary-color);
             border-radius: 1rem;
             padding: 20px;
+            box-sizing: border-box;
         }
 
         .flip-card-front {
@@ -920,6 +982,10 @@
             margin: 20px 0;
             font-size: 0.9em;
             text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .plan-features li {
@@ -954,12 +1020,38 @@
             box-shadow: 0 5px 15px rgba(255,255,255,0.3);
         }
 
+        /* Updated Card Header Layout */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .plan-title {
+            font-size: 1.5em;
+            font-weight: 900;
+            text-align: left;
+            margin: 0;
+        }
+
+        .plan-price-new {
+            font-size: 2.5em;
+            font-weight: bold;
+            text-align: right;
+            margin: 0;
+        }
+
         /* Script Tab */
         .script h2 {
             text-align: center;
             font-size: 3em;
             margin-bottom: 40px;
             color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
 
         .card {
@@ -1148,6 +1240,10 @@
             font-size: 2em;
             margin-bottom: 40px;
             color: #cccccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
 
         .games-grid {
@@ -1246,6 +1342,10 @@
             font-size: 3em;
             margin-bottom: 20px;
             color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
 
         .faq-subtitle {
@@ -1294,6 +1394,10 @@
             font-size: 2.5em;
             margin-bottom: 40px;
             color: #cccccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
 
         .features-grid {
@@ -1354,7 +1458,7 @@
             line-height: 1.6;
         }
 
-        /* Star Rating - Completely remade */
+        /* Star Rating */
         .rating-section {
             padding: 80px 0;
             background: transparent;
@@ -1367,6 +1471,10 @@
             font-size: 2.5em;
             margin-bottom: 20px;
             color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
 
         .rating-section p {
@@ -1466,9 +1574,110 @@
             color: #666;
         }
 
+        /* Get Key Button - Đã được làm to bằng nút Get Started */
+        .get-key-container {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        .btn-key {
+            display: inline-flex;
+            align-items: center;
+            font-family: inherit;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 17px;
+            padding: 0.8em 1.3em 0.8em 0.9em;
+            color: white;
+            background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 1px solid rgba(255,255,255,0.1);
+            letter-spacing: 0.05em;
+            border-radius: 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-key svg {
+            margin-right: 8px;
+            transform: rotate(0deg);
+            transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+            width: 20px;
+            height: 20px;
+            fill: #e5e5e5;
+        }
+
+        .btn-key span {
+            transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .btn-key:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .btn-key:hover svg {
+            transform: translateX(5px) rotate(15deg);
+            fill: #ffffff;
+        }
+
+        .btn-key:hover span {
+            transform: translateX(7px);
+        }
+
+        /* Icon animations */
+        .icon-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .icon-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .icon-spin {
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
         @media (max-width: 768px) {
             nav {
-                padding: 15px 20px;
+                padding: 12px 20px;
                 flex-direction: column;
                 gap: 15px;
             }
@@ -1488,7 +1697,7 @@
             }
 
             .tab-content {
-                padding: 100px 20px 50px;
+                padding: 120px 20px 50px;
             }
 
             .footer-content {
@@ -1501,7 +1710,7 @@
                 gap: 15px;
             }
             
-            .btn {
+            .btn, .btn-key {
                 width: 100%;
                 max-width: 300px;
                 justify-content: center;
@@ -1526,7 +1735,12 @@
             }
 
             .pricing-grid {
-                grid-template-columns: 1fr;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .flip-card {
+                width: 280px;
             }
             
             .popular-badge {
@@ -1534,11 +1748,12 @@
                 padding: 6px 15px;
             }
 
-            .about-features {
-                grid-template-columns: 1fr;
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
             }
 
-            .credits-grid {
+            .premium-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1549,6 +1764,19 @@
 
             .credit-info {
                 text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btn, .btn-key {
+                font-size: 15px;
+                padding: 0.7em 1.1em 0.7em 0.8em;
+            }
+
+            .btn svg, .btn-key svg {
+                width: 18px;
+                height: 18px;
+                margin-right: 6px;
             }
         }
     </style>
@@ -1564,7 +1792,7 @@
         
         <!-- Navigation Center -->
         <div class="nav-center">
-            <!-- Updated Navigation with Gray Theme -->
+            <!-- Updated Navigation với thiết kế trong suốt -->
             <div class="radio-inputs">
                 <div class="radio">
                     <input type="radio" id="nav-home" name="nav-radio" checked>
@@ -1624,20 +1852,27 @@
 
                 <div class="cta-buttons">
                     <a href="#premium-tab" class="btn btn-primary" data-tab="premium">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m10 17 5-5-5-5"></path>
+                            <path d="M15 12H3"></path>
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
                         </svg>
                         <span>Get Started</span>
                     </a>
                     <a href="#" class="btn btn-secondary">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 8V4H8"></path>
+                            <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+                            <path d="M2 14h2"></path>
+                            <path d="M20 14h2"></path>
+                            <path d="M15 13v2"></path>
+                            <path d="M9 13v2"></path>
                         </svg>
                         <span>Join Discord</span>
                     </a>
                 </div>
                 
-                <!-- Card mới với animation -->
+                <!-- Card với animation -->
                 <div class="logo-card-container">
                     <div class="hacker-card">
                         <img src="https://sf-static.upanhlaylink.com/img/image_202511262bf8b7d8b666ef8d8bcdb2446dad9828.jpg" alt="Hacker Logo" class="card-image">
@@ -1651,9 +1886,15 @@
             </div>
         </div>
 
-        <!-- Stats Section with 6 items -->
+        <!-- Stats Section với 10 mục -->
         <div class="stats">
-            <h2>About</h2>
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-float">
+                    <path d="M5 15a6.5 6.5 0 0 1 7 0 6.5 6.5 0 0 0 7 0"></path>
+                    <path d="M5 9a6.5 6.5 0 0 1 7 0 6.5 6.5 0 0 0 7 0"></path>
+                </svg>
+                About
+            </h2>
             <div class="stats-grid">
                 <div class="stat-item">
                     <div class="stat-number">500K+</div>
@@ -1679,12 +1920,39 @@
                     <div class="stat-number">100%</div>
                     <div class="stat-label">Data Secure</div>
                 </div>
+                <!-- 4 mục mới -->
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Games Supported</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">99%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10ms</div>
+                    <div class="stat-label">Ping Average</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">256-bit</div>
+                    <div class="stat-label">Encryption</div>
+                </div>
             </div>
         </div>
 
         <!-- Credits Section -->
         <div class="credits-section">
-            <h2>Credits</h2>
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-pulse">
+                    <path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13"></path>
+                    <path d="m8 6 2-2"></path>
+                    <path d="m18 16 2-2"></path>
+                    <path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17"></path>
+                    <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path>
+                    <path d="m15 5 4 4"></path>
+                </svg>
+                Credits
+            </h2>
             <p>Thank you to everyone who has contributed to making Hacker Hub possible</p>
             
             <div class="credits-grid">
@@ -1703,7 +1971,12 @@
 
         <!-- Star Rating Section -->
         <div class="rating-section">
-            <h2>Rate Our Service</h2>
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-spin">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                Rate Our Service
+            </h2>
             <p>Help us improve by rating your experience with Hacker Hub</p>
             <div class="rating">
                 <input type="radio" id="star5" name="rate" value="5">
@@ -1723,7 +1996,15 @@
     <!-- Premium Tab -->
     <section id="premium-tab" class="tab-content">
         <div class="premium">
-            <h2>Premium Features</h2>
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-pulse">
+                    <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path>
+                    <path d="M20 2v4"></path>
+                    <path d="M22 4h-4"></path>
+                    <circle cx="4" cy="20" r="2"></circle>
+                </svg>
+                Premium Features
+            </h2>
             <p class="premium-subtitle">Unlock the full potential with our premium subscription</p>
             <div class="premium-grid">
                 <div class="premium-card">
@@ -1746,18 +2027,39 @@
                     <h3>Exclusive Scripts</h3>
                     <p>Access to premium-only scripts and features not available to free users, giving you a competitive edge in supported games.</p>
                 </div>
+                <!-- 2 mục mới -->
+                <div class="premium-card">
+                    <div class="premium-icon">🔧</div>
+                    <h3>Custom Scripts</h3>
+                    <p>Get personalized scripts tailored to your specific needs and gaming style. Our developers will create custom solutions just for you.</p>
+                </div>
+                <div class="premium-card">
+                    <div class="premium-icon">📊</div>
+                    <h3>Advanced Analytics</h3>
+                    <p>Access detailed performance analytics and usage statistics to optimize your gaming experience and track your progress.</p>
+                </div>
             </div>
 
-            <!-- Pricing Plans Section -->
+            <!-- Fixed Pricing Plans Section -->
             <div class="pricing-section">
-                <h3>Choose Your Plan</h3>
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-float">
+                        <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                        <path d="M9 8h7"></path>
+                        <path d="M8 12h6"></path>
+                        <path d="M11 16h5"></path>
+                    </svg>
+                    Choose Your Plan
+                </h3>
                 <div class="pricing-grid">
                     <!-- 1 Week Plan -->
                     <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <p class="title">1 WEEK</p>
-                                <div class="plan-price">$1</div>
+                                <div class="card-header">
+                                    <p class="plan-title">1 WEEK</p>
+                                    <div class="plan-price-new">$1</div>
+                                </div>
                                 <ul class="plan-features">
                                     <li>Full Access</li>
                                     <li>All Games</li>
@@ -1775,12 +2077,13 @@
                     </div>
 
                     <!-- 1 Month Plan -->
-                    <div class="flip-card popular">
-                        <div class="popular-badge">MOST POPULAR</div>
+                    <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <p class="title">1 MONTH</p>
-                                <div class="plan-price">$3</div>
+                                <div class="card-header">
+                                    <p class="plan-title">1 MONTH</p>
+                                    <div class="plan-price-new">$3</div>
+                                </div>
                                 <ul class="plan-features">
                                     <li>Full Access</li>
                                     <li>All Games</li>
@@ -1792,7 +2095,7 @@
                             <div class="flip-card-back">
                                 <p class="title">1 MONTH</p>
                                 <div class="plan-price">$3</div>
-                                <p>Most Popular</p>
+                                <p>Most Popular Choice</p>
                                 <a href="https://maihuytung.mysellauth.com/product/maihuytung" target="_blank" class="buy-btn">Buy Now</a>
                             </div>
                         </div>
@@ -1802,8 +2105,10 @@
                     <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <p class="title">LIFETIME</p>
-                                <div class="plan-price">$7</div>
+                                <div class="card-header">
+                                    <p class="plan-title">LIFETIME</p>
+                                    <div class="plan-price-new">$7</div>
+                                </div>
                                 <ul class="plan-features">
                                     <li>Full Access</li>
                                     <li>All Games</li>
@@ -1825,14 +2130,16 @@
 
             <div class="cta-buttons" style="margin-top: 60px;">
                 <a href="https://maihuytung.mysellauth.com/product/maihuytung" target="_blank" class="btn btn-primary">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"></path>
+                        <path d="M5 21h14"></path>
                     </svg>
                     <span>Get Premium</span>
                 </a>
                 <a href="#" class="btn btn-secondary">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                        <polyline points="11 3 11 11 14 8 17 11 17 3"></polyline>
                     </svg>
                     <span>Learn More</span>
                 </a>
@@ -1843,7 +2150,13 @@
     <!-- Script Tab -->
     <section id="script-tab" class="tab-content">
         <div class="script">
-            <h2>Copy Script</h2>
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-float">
+                    <path d="M13 13.74a2 2 0 0 1-2 0L2.5 8.87a1 1 0 0 1 0-1.74L11 2.26a2 2 0 0 1 2 0l8.5 4.87a1 1 0 0 1 0 1.74z"></path>
+                    <path d="m20 14.285 1.5.845a1 1 0 0 1 0 1.74L13 21.74a2 2 0 0 1-2 0l-8.5-4.87a1 1 0 0 1 0-1.74l1.5-.845"></path>
+                </svg>
+                Copy Script
+            </h2>
             <div class="card">
                 <div class="wrap">
                     <div class="terminal">
@@ -1874,9 +2187,30 @@
                 </div>
             </div>
 
+            <!-- Get Key Button - Đã được làm to bằng nút Get Started -->
+            <div class="get-key-container">
+                <a href="https://junkie-development.de/overview/maihuytung" target="_blank" class="btn-key btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12.4 2.7a2.5 2.5 0 0 1 3.4 0l5.5 5.5a2.5 2.5 0 0 1 0 3.4l-3.7 3.7a2.5 2.5 0 0 1-3.4 0L8.7 9.8a2.5 2.5 0 0 1 0-3.4z"></path>
+                        <path d="m14 7 3 3"></path>
+                        <path d="m9.4 10.6-6.814 6.814A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814"></path>
+                    </svg>
+                    <span>Get Key</span>
+                </a>
+            </div>
+
             <!-- Supported Games Section -->
             <div class="supported-games">
-                <h3>Supported Games</h3>
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-pulse">
+                        <line x1="6" x2="10" y1="11" y2="11"></line>
+                        <line x1="8" x2="8" y1="9" y2="13"></line>
+                        <line x1="15" x2="15.01" y1="12" y2="12"></line>
+                        <line x1="18" x2="18.01" y1="10" y2="10"></line>
+                        <path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.152A4 4 0 0 0 17.32 5z"></path>
+                    </svg>
+                    Supported Games
+                </h3>
                 <div class="games-grid">
                     <!-- Blox Fruits -->
                     <div class="game-card">
@@ -1921,7 +2255,14 @@
     <!-- FAQ Tab -->
     <section id="faq-tab" class="tab-content">
         <div class="faq">
-            <h2>Frequently Asked Questions</h2>
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-float">
+                    <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path>
+                    <line x1="12" x2="12" y1="8" y2="12"></line>
+                    <line x1="12" x2="12.01" y1="16" y2="16"></line>
+                </svg>
+                Frequently Asked Questions
+            </h2>
             <p class="faq-subtitle">Got questions? We've got answers. Find everything you need to know about Hacker Hub.</p>
             
             <div class="faq-item">
@@ -1946,7 +2287,14 @@
 
             <!-- Features Section in FAQ -->
             <div class="features-section">
-                <h3>Why Choose Hacker Hub?</h3>
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-pulse">
+                        <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path>
+                        <line x1="12" x2="12" y1="16" y2="12"></line>
+                        <line x1="12" x2="12.01" y1="8" y2="8"></line>
+                    </svg>
+                    Why Choose Hacker Hub?
+                </h3>
                 <div class="features-grid">
                     <div class="feature-card">
                         <div class="feature-icon">🛡️</div>
@@ -1980,8 +2328,13 @@
                 <p>Universal Script</p>
                 <div class="cta-buttons" style="margin-top: 20px; justify-content: flex-start;">
                     <a href="#" class="btn btn-secondary" style="padding: 0.8em 1.3em 0.8em 0.9em;">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 8V4H8"></path>
+                            <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+                            <path d="M2 14h2"></path>
+                            <path d="M20 14h2"></path>
+                            <path d="M15 13v2"></path>
+                            <path d="M9 13v2"></path>
                         </svg>
                         <span>Join Discord</span>
                     </a>
@@ -2033,6 +2386,16 @@
             snow.style.height = snow.style.width;
             snowContainer.appendChild(snow);
         }
+
+        // Scroll effect for navbar
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
 
         // Tab functionality
         const navRadios = document.querySelectorAll('.radio-inputs input');
